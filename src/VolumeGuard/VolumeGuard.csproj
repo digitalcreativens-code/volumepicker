@@ -11,6 +11,10 @@
     <StartupObject>VolumeGuard.Program</StartupObject>
     <Version>1.0.0</Version>
   </PropertyGroup>
+  <!-- Include WinForms assemblies (for NotifyIcon tray) WITHOUT implicit usings to avoid ambiguity -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="NAudio" Version="2.2.1" />

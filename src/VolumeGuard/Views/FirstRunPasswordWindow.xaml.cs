@@ -1,5 +1,4 @@
 using System.Windows;
-using WpfMessageBox = System.Windows.MessageBox;
 
 namespace VolumeGuard.Views;
 
@@ -17,13 +16,13 @@ public partial class FirstRunPasswordWindow : Window
     {
         if (Pwd1.Password.Length < 4)
         {
-            WpfMessageBox.Show("Šifra mora imati bar 4 karaktera.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Šifra mora imati bar 4 karaktera.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
         if (Pwd1.Password != Pwd2.Password)
         {
-            WpfMessageBox.Show("Šifre se ne poklapaju.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Šifre se ne poklapaju.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 

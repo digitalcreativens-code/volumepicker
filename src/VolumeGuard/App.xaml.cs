@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using VolumeGuard.Services;
 using VolumeGuard.ViewModels;
 using VolumeGuard.Views;
-using WpfMessageBox = System.Windows.MessageBox;
 
 namespace VolumeGuard;
 
-public partial class App : System.Windows.Application
+public partial class App : Application
 {
     private static Mutex? _mainMutex;
 
@@ -26,7 +25,7 @@ public partial class App : System.Windows.Application
         DispatcherUnhandledException += (_, ex) =>
         {
             WriteLog(ex.Exception);
-            WpfMessageBox.Show(
+            MessageBox.Show(
                 $"Neočekivana greška:\n\n{ex.Exception.Message}\n\nDetalji su u: {LogPath}",
                 "VolumeGuard — Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             ex.Handled = true;
@@ -43,7 +42,7 @@ public partial class App : System.Windows.Application
             _mainMutex = new Mutex(true, AppConstants.MainMutexName, out var createdNew);
             if (!createdNew)
             {
-                WpfMessageBox.Show("VolumeGuard je već pokrenut.", "VolumeGuard",
+                MessageBox.Show("VolumeGuard je već pokrenut.", "VolumeGuard",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 _mainMutex.Dispose();
                 _mainMutex = null;
@@ -102,7 +101,7 @@ public partial class App : System.Windows.Application
         catch (Exception ex)
         {
             WriteLog(ex);
-            WpfMessageBox.Show(
+            MessageBox.Show(
                 $"Greška pri pokretanju:\n\n{ex.Message}\n\nDetalji u: {LogPath}",
                 "VolumeGuard — Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             Shutdown(1);

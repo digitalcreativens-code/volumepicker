@@ -3,8 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using VolumeGuard.Models;
 using VolumeGuard.Services;
-using WpfBinding = System.Windows.Data.Binding;
-using WpfMessageBox = System.Windows.MessageBox;
+using System.Windows.Data;
 
 namespace VolumeGuard.Views;
 
@@ -24,9 +23,9 @@ public partial class SettingsWindow : Window
             _slots.Add(new ScheduleSlot { Start = s.Start, End = s.End, MaxVolumePercent = s.MaxVolumePercent });
 
         GridSlots.ItemsSource = _slots;
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Start (HH:mm)", Binding = new WpfBinding("Start"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Kraj (HH:mm)", Binding = new WpfBinding("End"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Max %", Binding = new WpfBinding("MaxVolumePercent"), Width = 120 });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Start (HH:mm)", Binding = new Binding("Start"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Kraj (HH:mm)", Binding = new Binding("End"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Max %", Binding = new Binding("MaxVolumePercent"), Width = 120 });
 
         TxtPoll.Text = _config.Current.PollingIntervalMs.ToString();
         ChkProtection.IsChecked = _config.Current.ProtectionEnabled;
@@ -37,7 +36,7 @@ public partial class SettingsWindow : Window
     {
         if (!int.TryParse(TxtPoll.Text, out var poll) || poll < 100 || poll > 10_000)
         {
-            WpfMessageBox.Show("Interval mora biti broj između 100 i 10000 ms.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Interval mora biti broj između 100 i 10000 ms.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
@@ -48,7 +47,7 @@ public partial class SettingsWindow : Window
         var exe = Environment.ProcessPath;
         if (string.IsNullOrEmpty(exe))
         {
-            WpfMessageBox.Show("Ne mogu da odredim putanju EXE fajla.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Ne mogu da odredim putanju EXE fajla.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
@@ -59,7 +58,7 @@ public partial class SettingsWindow : Window
         }
         catch (Exception ex)
         {
-            WpfMessageBox.Show("Greška pri upisu auto-starta: " + ex.Message, "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Greška pri upisu auto-starta: " + ex.Message, "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
