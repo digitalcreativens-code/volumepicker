@@ -1,5 +1,6 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using VolumeGuard.Services;
 using WpfMessageBox = System.Windows.MessageBox;
 
 namespace VolumeGuard.Views;

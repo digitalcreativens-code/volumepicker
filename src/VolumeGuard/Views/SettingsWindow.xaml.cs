@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using WpfMessageBox = System.Windows.MessageBox;
 using VolumeGuard.Models;
 using VolumeGuard.Services;
+using WpfBinding = System.Windows.Data.Binding;
+using WpfMessageBox = System.Windows.MessageBox;
 
 namespace VolumeGuard.Views;
 
@@ -24,9 +24,9 @@ public partial class SettingsWindow : Window
             _slots.Add(new ScheduleSlot { Start = s.Start, End = s.End, MaxVolumePercent = s.MaxVolumePercent });
 
         GridSlots.ItemsSource = _slots;
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Start (HH:mm)", Binding = new Binding("Start"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Kraj (HH:mm)", Binding = new Binding("End"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
-        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Max %", Binding = new Binding("MaxVolumePercent"), Width = 120 });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Start (HH:mm)", Binding = new WpfBinding("Start"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Kraj (HH:mm)", Binding = new WpfBinding("End"), Width = new DataGridLength(1, DataGridLengthUnitType.Star) });
+        GridSlots.Columns.Add(new DataGridTextColumn { Header = "Max %", Binding = new WpfBinding("MaxVolumePercent"), Width = 120 });
 
         TxtPoll.Text = _config.Current.PollingIntervalMs.ToString();
         ChkProtection.IsChecked = _config.Current.ProtectionEnabled;
