@@ -16,10 +16,11 @@ Glavna instanca automatski podiže watchdog; watchdog održava glavnu instancu �
 
 Na **ovom Mac okruženju** ne mogu da ti generišem bajtove `.exe` fajla (nema instaliranog `dotnet` SDK-a, a WPF se ionako ne builduje na macOS-u). Izbori:
 
-1. **GitHub Actions (najlakše ako repo ide na GitHub)**  
-   - Pushuj ovaj folder kao repo na GitHub.  
-   - U **Actions** pokreni workflow **Build Windows EXE** (`workflow_dispatch` ili automatski na push).  
-   - Sačekaj job, pa u artefaktu **VolumeGuard-win-x64-singlefile** preuzmi `VolumeGuard.exe`.
+1. **GitHub Actions**  
+   - Workflow fajl je u repou kao **`docs/github-workflow-build-windows-exe.yml`** (van `.github/`) zato što GitHub **odbija push** workflow-a preko HTTPS tokena koji nema scope **`workflow`**.  
+   - **Opcija A:** na GitHubu otvori repo → **Add file** → **Create new file** → putanja `.github/workflows/build-windows-exe.yml` → nalepi sadržaj iz `docs/github-workflow-build-windows-exe.yml` → Commit. Zatim **Actions** → **Build Windows EXE** → **Run workflow** (ili push u `src/VolumeGuard/`).  
+   - **Opcija B:** u GitHubu **Settings → Developer settings → Personal access tokens** dodaj scope **`workflow`** na token koji Cursor koristi, pa u lokalnom repou vrati isti YAML pod `.github/workflows/` i uradi `git push`.  
+   - Artefakt: **VolumeGuard-win-x64-singlefile** → `VolumeGuard.exe`.
 
 2. **Bilo koji Windows PC sa .NET 8 SDK**  
    - U PowerShell-u iz korena repoa:

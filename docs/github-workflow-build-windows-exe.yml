@@ -1,3 +1,9 @@
+# Kopiraj ovaj fajl u repo kao: .github/workflows/build-windows-exe.yml
+# (ili u GitHubu: Add file → Create new file → nalepi sadržaj)
+#
+# Napomena: ako koristiš HTTPS + Personal Access Token, token mora imati
+# scope "workflow" da bi git push mogao da ažurira workflow fajlove.
+
 name: Build Windows EXE
 
 on:
@@ -5,7 +11,6 @@ on:
   push:
     paths:
       - 'src/VolumeGuard/**'
-      - '.github/workflows/build-windows-exe.yml'
 
 jobs:
   publish:
