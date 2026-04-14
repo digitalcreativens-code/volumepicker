@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WpfMessageBox = System.Windows.MessageBox;
 using VolumeGuard.Models;
 using VolumeGuard.Services;
 
@@ -36,7 +37,7 @@ public partial class SettingsWindow : Window
     {
         if (!int.TryParse(TxtPoll.Text, out var poll) || poll < 100 || poll > 10_000)
         {
-            MessageBox.Show("Interval mora biti broj između 100 i 10000 ms.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            WpfMessageBox.Show("Interval mora biti broj između 100 i 10000 ms.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
@@ -47,7 +48,7 @@ public partial class SettingsWindow : Window
         var exe = Environment.ProcessPath;
         if (string.IsNullOrEmpty(exe))
         {
-            MessageBox.Show("Ne mogu da odredim putanju EXE fajla.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
+            WpfMessageBox.Show("Ne mogu da odredim putanju EXE fajla.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
@@ -58,7 +59,7 @@ public partial class SettingsWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Greška pri upisu auto-starta: " + ex.Message, "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
+            WpfMessageBox.Show("Greška pri upisu auto-starta: " + ex.Message, "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 

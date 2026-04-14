@@ -1,5 +1,6 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using WpfMessageBox = System.Windows.MessageBox;
 
 namespace VolumeGuard.Views;
 
@@ -16,13 +17,13 @@ public static class PasswordGate
 
         if (string.IsNullOrEmpty(dlg.Password))
         {
-            MessageBox.Show("Šifra je obavezna.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            WpfMessageBox.Show("Šifra je obavezna.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return false;
         }
 
         if (!pwd.Verify(dlg.Password))
         {
-            MessageBox.Show("Pogrešna šifra.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
+            WpfMessageBox.Show("Pogrešna šifra.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Warning);
             return false;
         }
 

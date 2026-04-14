@@ -106,10 +106,9 @@ public static class WatchdogRunner
 
     private static string GetExePath()
     {
-        var p = Environment.ProcessPath;
-        if (!string.IsNullOrEmpty(p))
-            return p;
-
-        return Path.ChangeExtension(typeof(WatchdogRunner).Assembly.Location, ".exe");
+        // Environment.ProcessPath is reliable for both normal and single-file published EXEs.
+        // Assembly.Location returns empty string in single-file mode, so we never use it.
+        return Environment.ProcessPath
+            ?? throw new InvalidOperationException("Cannot determine executable path.");
     }
 }

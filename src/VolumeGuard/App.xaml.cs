@@ -1,5 +1,6 @@
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using WpfMessageBox = System.Windows.MessageBox;
 using VolumeGuard.Services;
 using VolumeGuard.ViewModels;
 using VolumeGuard.Views;
@@ -23,7 +24,7 @@ public partial class App : System.Windows.Application
         _mainMutex = new Mutex(true, AppConstants.MainMutexName, out var createdNew);
         if (!createdNew)
         {
-            MessageBox.Show("VolumeGuard je već pokrenut.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Information);
+            WpfMessageBox.Show("VolumeGuard je već pokrenut.", "VolumeGuard", MessageBoxButton.OK, MessageBoxImage.Information);
             _mainMutex.Dispose();
             _mainMutex = null;
             Shutdown();
