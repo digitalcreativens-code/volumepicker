@@ -6,11 +6,11 @@ using VolumeGuard.Views;
 
 namespace VolumeGuard;
 
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     private static Mutex? _mainMutex;
 
-    /// <summary>Set to true immediately before <see cref="Application.Shutdown"/> after password-approved exit.</summary>
+    /// <summary>Set to true immediately before shutdown after password-approved exit.</summary>
     public static bool MarkNextShutdownAsClean { get; set; }
 
     /// <summary>Avoid re-entrancy password prompts when shutdown was already authorized (e.g. tray Exit).</summary>

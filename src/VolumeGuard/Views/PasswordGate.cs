@@ -10,7 +10,7 @@ public static class PasswordGate
         var sp = App.Services ?? throw new InvalidOperationException("Services not initialized.");
         var pwd = sp.GetRequiredService<PasswordService>();
         var dlg = sp.GetRequiredService<PasswordPromptWindow>();
-        dlg.Owner = Application.Current.MainWindow;
+        dlg.Owner = System.Windows.Application.Current.MainWindow;
         if (dlg.ShowDialog() != true)
             return false;
 

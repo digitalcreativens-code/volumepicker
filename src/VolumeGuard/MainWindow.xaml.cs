@@ -71,7 +71,7 @@ public partial class MainWindow : Window
 
         App.SuppressPasswordForClose = true;
         App.MarkNextShutdownAsClean = true;
-        Application.Current.Shutdown();
+        System.Windows.Application.Current.Shutdown();
     }
 
     protected override void OnClosed(EventArgs e)
